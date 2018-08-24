@@ -16,6 +16,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SportsNews" />
+        <activity android:name=".TechNews" />
+        <activity android:name=".EntertainmentNews" />
+        <activity android:name=".ScienceNews" />
+        <activity android:name=".GamingNews" />
+        <activity android:name=".BusinessNews"></activity>
     </application>
 
 </manifest>
