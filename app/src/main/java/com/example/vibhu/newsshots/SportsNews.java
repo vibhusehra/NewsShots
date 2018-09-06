@@ -18,26 +18,63 @@ import retrofit2.Response;
 
 
 public class SportsNews extends AppCompatActivity {
-    RecyclerView programmingList;
+    RecyclerView sportsList;
     List<Article> articles;
+    private int option;
     private final static  String key = "5d9c9b7e0e0b4b3ebaece4b1ee6944ff";
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        //retrieving the option selected
+        Bundle extras = getIntent().getExtras();
+
+        if(extras!=null){
+            option = extras.getInt("OPTION_SELECTED_ID");
+        }
+
         setContentView(R.layout.activity_sports_news);
-        programmingList = findViewById(R.id.programmingList);
-        programmingList.setLayoutManager(new LinearLayoutManager(this));
-        programmingList.setHasFixedSize(true);
+        sportsList = findViewById(R.id.sportsList);
+        sportsList.setLayoutManager(new LinearLayoutManager(this));
+        sportsList.setHasFixedSize(true);
         Fresco.initialize(this);
-        getData();
+        checkOption();
 
     }
 
-    private void getData()
+    private void checkOption()
     {
-        Call<User> user = NewsAPI.getService().getArticlesList("sports","in",""+key);
+        String category;
+        switch (option) {
+            case 0:
+                category = "sports";
+                break;
+            case 1:
+                category = "technology";
+                break;
+            case 2:
+                category = "business";
+                break;
+            case 3:
+                category = "";
+                break;
+            case 4:
+                category = "science";
+                break;
+            case 5:
+                category = "entertainment";
+                break;
+            default:
+                category = "sports";
+        }
+        getData(category);
+    }
+
+    void getData(String category)
+    {
+        Call<User> user = NewsAPI.getService().getArticlesList(category,"in",""+key);
 
         user.enqueue(new Callback<User>() {
             @Override
@@ -49,7 +86,7 @@ public class SportsNews extends AppCompatActivity {
                 for(Article a:articles){
                     Log.d("author","" + a.getAuthor());
                 }
-                programmingList.setAdapter(new RecyclerViewAdapter(articles, SportsNews.this));
+                sportsList.setAdapter(new RecyclerViewAdapter(articles, SportsNews.this));
             }
 
             @Override
@@ -57,5 +94,6 @@ public class SportsNews extends AppCompatActivity {
                 Toast.makeText(SportsNews.this,"Failure!",Toast.LENGTH_SHORT).show();;
             }
         });
+
     }
 }
