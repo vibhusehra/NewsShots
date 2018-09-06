@@ -40,13 +40,16 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
         holder.newsTitle.setText(articles.get(position).getTitle());
         holder.newsDescription.setText(articles.get(position).getDescription());
-        Uri uri = Uri.parse(articles.get(position).getUrlToImage());
-        if(uri != null){
-            holder.simpleDraweeView.setImageURI(uri);
+        String url = articles.get(position).getUrlToImage();
+        Uri uri;
+        if(url != null){
+            uri = Uri.parse(url);
         }
         else{
-            Toast.makeText(context,"END",Toast.LENGTH_SHORT).show();
+            uri = Uri.parse("https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/1024px-No_image_available.svg.png");
+            //Toast.makeText(context,"END",Toast.LENGTH_SHORT).show();
         }
+        holder.simpleDraweeView.setImageURI(uri);
     }
 
     @Override
