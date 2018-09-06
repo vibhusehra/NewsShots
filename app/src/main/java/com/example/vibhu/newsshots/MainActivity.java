@@ -42,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivity(int i){
         Intent intent;
-        switch (i){
+        intent = new Intent(MainActivity.this,SportsNews.class);
+        intent.putExtra("OPTION_SELECTED_ID",i);
+        startActivity(intent);
+       /* switch (i){
             case 0:
                 intent = new Intent(MainActivity.this,SportsNews.class);
                 startActivity(intent);
@@ -67,6 +70,6 @@ public class MainActivity extends AppCompatActivity {
                 intent = new Intent(MainActivity.this,EntertainmentNews.class);
                 startActivity(intent);
                 break;
-        }
+        }*/
     }
 }
