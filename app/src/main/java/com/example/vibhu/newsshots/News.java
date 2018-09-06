@@ -1,6 +1,5 @@
 package com.example.vibhu.newsshots;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,8 +16,8 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class SportsNews extends AppCompatActivity {
-    RecyclerView sportsList;
+public class News extends AppCompatActivity {
+    RecyclerView newsList;
     List<Article> articles;
     private int option;
     private final static  String key = "5d9c9b7e0e0b4b3ebaece4b1ee6944ff";
@@ -35,10 +34,10 @@ public class SportsNews extends AppCompatActivity {
             option = extras.getInt("OPTION_SELECTED_ID");
         }
 
-        setContentView(R.layout.activity_sports_news);
-        sportsList = findViewById(R.id.sportsList);
-        sportsList.setLayoutManager(new LinearLayoutManager(this));
-        sportsList.setHasFixedSize(true);
+        setContentView(R.layout.activity_news);
+        newsList = findViewById(R.id.newsList);
+        newsList.setLayoutManager(new LinearLayoutManager(this));
+        newsList.setHasFixedSize(true);
         Fresco.initialize(this);
         checkOption();
 
@@ -72,6 +71,7 @@ public class SportsNews extends AppCompatActivity {
         getData(category);
     }
 
+
     void getData(String category)
     {
         Call<User> user = NewsAPI.getService().getArticlesList(category,"in",""+key);
@@ -80,18 +80,18 @@ public class SportsNews extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user = response.body();
-                Toast.makeText(SportsNews.this,"Success!",Toast.LENGTH_SHORT).show();
+                Toast.makeText(News.this,"Success!",Toast.LENGTH_SHORT).show();
                 articles = user.getArticles();
 
                 for(Article a:articles){
                     Log.d("author","" + a.getAuthor());
                 }
-                sportsList.setAdapter(new RecyclerViewAdapter(articles, SportsNews.this));
+                newsList.setAdapter(new RecyclerViewAdapter(articles, News.this));
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(SportsNews.this,"Failure!",Toast.LENGTH_SHORT).show();;
+                Toast.makeText(News.this,"Failure!",Toast.LENGTH_SHORT).show();;
             }
         });
 
