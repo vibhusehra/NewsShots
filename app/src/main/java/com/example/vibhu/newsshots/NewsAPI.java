@@ -4,11 +4,12 @@ import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 public class NewsAPI {
 
-    private final static String url = "https://newsapi.org/v2/top-headlines/";
-    private final static  String key = "5d9c9b7e0e0b4b3ebaece4b1ee6944ff";
+    private final static String url = "https://newsapi.org/v2/";
+
 
     public static Service service = null;
 
@@ -30,8 +31,10 @@ public class NewsAPI {
 
 
     public interface Service{
-        @GET("?category=sports&country=in&apiKey=" + key)
-        Call<User> getArticlesList();
+        @GET("top-headlines/")//?category=sports&country=in&apiKey=" + key)
+        Call<User> getArticlesList(@Query("category")String category,
+                                   @Query("country")String country,
+                                   @Query("apiKey")String key);
     }
 
 }

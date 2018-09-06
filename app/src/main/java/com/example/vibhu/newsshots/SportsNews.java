@@ -20,7 +20,7 @@ import retrofit2.Response;
 public class SportsNews extends AppCompatActivity {
     RecyclerView programmingList;
     List<Article> articles;
-
+    private final static  String key = "5d9c9b7e0e0b4b3ebaece4b1ee6944ff";
 
 
     @Override
@@ -37,7 +37,7 @@ public class SportsNews extends AppCompatActivity {
 
     private void getData()
     {
-        Call<User> user = NewsAPI.getService().getArticlesList();
+        Call<User> user = NewsAPI.getService().getArticlesList("sports","in",""+key);
 
         user.enqueue(new Callback<User>() {
             @Override
