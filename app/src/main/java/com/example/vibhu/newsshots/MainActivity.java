@@ -42,34 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void openActivity(int i){
         Intent intent;
-        intent = new Intent(MainActivity.this,SportsNews.class);
+        intent = new Intent(MainActivity.this,News.class);
         intent.putExtra("OPTION_SELECTED_ID",i);
         startActivity(intent);
-       /* switch (i){
-            case 0:
-                intent = new Intent(MainActivity.this,SportsNews.class);
-                startActivity(intent);
-                break;
-            case 1:
-                intent = new Intent(MainActivity.this,TechNews.class);
-                startActivity(intent);
-                break;
-            case 2:
-                intent = new Intent(MainActivity.this,BusinessNews.class);
-                startActivity(intent);
-                break;
-            case 3:
-                intent = new Intent(MainActivity.this,GamingNews.class);
-                startActivity(intent);
-                break;
-            case 4:
-                intent = new Intent(MainActivity.this,ScienceNews.class);
-                startActivity(intent);
-                break;
-            case 5:
-                intent = new Intent(MainActivity.this,EntertainmentNews.class);
-                startActivity(intent);
-                break;
-        }*/
     }
 }
